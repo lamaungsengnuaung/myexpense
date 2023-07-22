@@ -3,6 +3,7 @@ import { useState } from "react";
 import Expense from "./Components/Expense/Expense";
 import NewExpense from "./Components/NewExpense/NewExpense";
 function App() {
+  // console.log(props);
   const initialExpenses = [
     {
       id: "e1",
@@ -29,31 +30,29 @@ function App() {
   const toggleListHandler = () => {
     setAllow((allow) => !allow);
   };
-  const display = { display: allow ? "none" : "block" };
-  // End Header Toggle
-  // first
-  // const [updatedexpenses, setExpense] = useState(initialExpenses);
-
-  // const onAddExpenseHandler = (newexpenseWithID) => {
-  //   setExpense([newexpenseWithID, ...initialExpenses]);
-  //   // const newIdExpense = [...initialExpenses, newexpenseWithID];
-  //   // console.log(newIdExpense);
-  // };
-  // console.log(updatedexpenses);// End
+  const display = allow ? "none" : "block";
+  // End Header toggle
   const [updatedExpense, setExpense] = useState(initialExpenses);
   const onAddExpense = (props) => {
     const addingExpense = [props, ...updatedExpense];
     setExpense(addingExpense);
-    // console.log(updatedExpense);// ...pending state
+    // console.log(updatedExpense); // ...pending state
   };
-  console.log(updatedExpense);
-
+  // console.log(updatedExpense);
   return (
-    <div>
-      <h1 style={display}>My Expense List</h1>
-      <button onClick={toggleListHandler} className="expense-item__price">
-        {allow ? "😀Show" : "😣Close"}
-      </button>
+    <div className="expenses">
+      <div className="expenses">
+        <h1 style={{ display, color: "white", textAlign: "center" }}>
+          My Expense List
+        </h1>
+        <button
+          style={{ float: "right" }}
+          onClick={toggleListHandler}
+          className="expense-item__price"
+        >
+          {allow ? "😀Show" : "😣Close"}
+        </button>
+      </div>
       <div className="expenses">
         <NewExpense onAddExpense={onAddExpense} />
         <Expense expenses={updatedExpense} />
